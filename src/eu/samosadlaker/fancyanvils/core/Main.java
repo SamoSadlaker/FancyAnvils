@@ -1,6 +1,7 @@
 package eu.samosadlaker.fancyanvils.core;
 
 import eu.samosadlaker.fancyanvils.commands.Rename;
+import eu.samosadlaker.fancyanvils.commands.TabCompleter;
 import eu.samosadlaker.fancyanvils.listeners.AnvilRename;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,7 @@ public class Main extends JavaPlugin {
         reloadConfig();
 
         registerCommands();
+        registerTabCompleter();
         registerListeners();
 
         logger.sendMessage(Colors.formatColor("&b-------------------------------------"));
@@ -44,6 +46,9 @@ public class Main extends JavaPlugin {
 
     private void registerListeners(){
         getServer().getPluginManager().registerEvents(new AnvilRename(), this);
+    }
+    private void registerTabCompleter(){
+        getCommand("fancyanvils").setTabCompleter(new TabCompleter());
     }
     private void registerCommands(){
         getCommand("fancyanvil").setExecutor(new Rename());
