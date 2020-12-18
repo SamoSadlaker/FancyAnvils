@@ -7,7 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -83,6 +85,41 @@ public class Rename implements CommandExecutor {
                 itemmeta.setLore());
                 p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
             }*/
+
+            if(args[0].equalsIgnoreCase("glowing")){
+                Player p = (Player) sender;
+                if(args[1].length() == 0){
+                    sender.sendMessage(Colors.formatColor(prefix + config.getString("command-usage")));
+                    return false;
+                }
+                if(args[1].equalsIgnoreCase("true")){
+
+                    if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR)){
+                        sender.sendMessage(Colors.formatColor(prefix + config.getString("holdblock")));
+                        return false;
+                    }
+
+                    ItemMeta itemmeta = p.getInventory().getItemInMainHand().getItemMeta();
+                    itemmeta.addEnchant(Enchantment.QUICK_CHARGE, 1, true);
+                    itemmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                    p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
+
+                }
+                if(args[1].equalsIgnoreCase("false")){
+
+                    if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR)){
+                        sender.sendMessage(Colors.formatColor(prefix + config.getString("holdblock")));
+                        return false;
+                    }
+
+                    ItemMeta itemmeta = p.getInventory().getItemInMainHand().getItemMeta();
+                    itemmeta.removeEnchant(Enchantment.QUICK_CHARGE);
+                    itemmeta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+                    p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
+
+                }
+
+            }
 
 
         }
