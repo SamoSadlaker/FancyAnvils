@@ -1,5 +1,6 @@
 package eu.samosadlaker.fancyanvils.core;
 
+import eu.samosadlaker.fancyanvils.commands.Rename;
 import eu.samosadlaker.fancyanvils.listeners.AnvilRename;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin {
         }
         reloadConfig();
 
+        registerCommands();
         registerListeners();
 
         logger.sendMessage(Colors.formatColor("&b-------------------------------------"));
@@ -42,6 +44,9 @@ public class Main extends JavaPlugin {
 
     private void registerListeners(){
         getServer().getPluginManager().registerEvents(new AnvilRename(), this);
+    }
+    private void registerCommands(){
+        getCommand("fancyanvil").setExecutor(new Rename());
     }
 
     @Override

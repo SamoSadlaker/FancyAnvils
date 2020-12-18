@@ -1,1 +1,7 @@
 prefix: "&f[&dF&aA&bN&dC&6Y &6Anvils&7]"
+
+permission: "fancyanvils.use"
+
+notplayer: "This commands can use only players"
+reload-completed: "&bPlugin successfully reloaded"
+command-usage: "&bPlease type &e/fancyanvils [reload|rename] <colored name>"
