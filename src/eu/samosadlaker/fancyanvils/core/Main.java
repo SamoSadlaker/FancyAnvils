@@ -1,5 +1,6 @@
 package eu.samosadlaker.fancyanvils.core;
 
+import eu.samosadlaker.fancyanvils.listeners.AnvilRename;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -30,13 +31,17 @@ public class Main extends JavaPlugin {
         }
         reloadConfig();
 
-
+        registerListeners();
 
         logger.sendMessage(Colors.formatColor("&b-------------------------------------"));
         logger.sendMessage(Colors.formatColor("&aPlugin &b" + pdf.getName() + " &asuccessfully enabled"));
         logger.sendMessage(Colors.formatColor("&a" + pdf.getVersion() + " &f| &a" + pdf.getAuthors().toString() + " &f| &a" + pdf.getWebsite() ));
         logger.sendMessage(Colors.formatColor("&b-------------------------------------"));
 
+    }
+
+    private void registerListeners(){
+        getServer().getPluginManager().registerEvents(new AnvilRename(), this);
     }
 
     @Override
