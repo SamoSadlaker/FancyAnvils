@@ -16,7 +16,8 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if(arguments.isEmpty()){
             arguments.add("reload");
             arguments.add("rename");
-            //arguments.add("setlore");
+            arguments.add("glowing");
+            arguments.add("clearlore");
         }
 
         List<String> result = new ArrayList<String>();

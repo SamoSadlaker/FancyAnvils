@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public class Rename implements CommandExecutor {
 
             if(args[0].equalsIgnoreCase("rename")){
                 Player p = (Player) sender;
-                if(args[1].length() == 0){
+                if(args.length <= 1){
                     sender.sendMessage(Colors.formatColor(prefix + config.getString("command-usage")));
                     return false;
                 }
@@ -71,24 +72,29 @@ public class Rename implements CommandExecutor {
 
                 itemmeta.setDisplayName(Colors.formatColor(args[1]));
                 p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
+
+                p.sendMessage(Colors.formatColor(prefix + config.getString("itemrenamed") + "&f &e" + args[1]));
+                return true;
             }
 
-            /*if(args[0].equalsIgnoreCase("addlore")){
+            if(args[0].equalsIgnoreCase("clearlore")){
                 Player p = (Player) sender;
-                if(args[1].length() <= 0){
-                    sender.sendMessage(Colors.formatColor(prefix + config.getString("command-usage")));
+                if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR)){
+                    sender.sendMessage(Colors.formatColor(prefix + config.getString("holdblock")));
                     return false;
                 }
 
                 ItemMeta itemmeta = p.getInventory().getItemInMainHand().getItemMeta();
 
-                itemmeta.setLore());
+                itemmeta.setLore(null);
                 p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
-            }*/
+                p.sendMessage(Colors.formatColor(prefix + config.getString("clearlore")));
+                return true;
+            }
 
             if(args[0].equalsIgnoreCase("glowing")){
                 Player p = (Player) sender;
-                if(args[1].length() == 0){
+                if(args.length <= 1){
                     sender.sendMessage(Colors.formatColor(prefix + config.getString("command-usage")));
                     return false;
                 }
@@ -103,6 +109,8 @@ public class Rename implements CommandExecutor {
                     itemmeta.addEnchant(Enchantment.QUICK_CHARGE, 1, true);
                     itemmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
+                    p.sendMessage(Colors.formatColor(prefix + config.getString("itemglowing")));
+                    return true;
 
                 }
                 if(args[1].equalsIgnoreCase("false")){
@@ -116,7 +124,8 @@ public class Rename implements CommandExecutor {
                     itemmeta.removeEnchant(Enchantment.QUICK_CHARGE);
                     itemmeta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
                     p.getInventory().getItemInMainHand().setItemMeta(itemmeta);
-
+                    p.sendMessage(Colors.formatColor(prefix + config.getString("itemnotglowing")));
+                    return true;
                 }
 
             }
